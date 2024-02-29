@@ -1,0 +1,229 @@
+//BINARY COUNTER CODE
+int LED_PIN = 13;
+int LED_PIN2 = 12;
+int LED_PIN3 = 11;
+int LED_PIN4 = 10;
+
+void setup() {
+  // Define the LED pin
+
+  // Set the LED pin as an output
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(LED_PIN2, OUTPUT);
+  pinMode(LED_PIN3, OUTPUT);
+  pinMode(LED_PIN4, OUTPUT);
+}
+
+void loop() {
+//lights for 0
+digitalWrite(LED_PIN, LOW);
+digitalWrite(LED_PIN2, LOW);
+digitalWrite(LED_PIN3, LOW);
+digitalWrite(LED_PIN4, LOW);
+delay(500);
+//lights for 1
+digitalWrite(LED_PIN, HIGH);
+digitalWrite(LED_PIN2, LOW);
+digitalWrite(LED_PIN3, LOW);
+digitalWrite(LED_PIN4, LOW);
+delay(500);
+//lights for 2
+digitalWrite(LED_PIN, LOW);
+digitalWrite(LED_PIN2, HIGH);
+digitalWrite(LED_PIN3, LOW);
+digitalWrite(LED_PIN4, LOW);
+delay(500);
+//Lights for 3
+digitalWrite(LED_PIN, HIGH);
+digitalWrite(LED_PIN2, HIGH);
+digitalWrite(LED_PIN3, LOW);
+digitalWrite(LED_PIN4, LOW);
+delay(500);
+//lights for 4
+digitalWrite(LED_PIN, LOW);
+digitalWrite(LED_PIN2, LOW);
+digitalWrite(LED_PIN3, HIGH);
+digitalWrite(LED_PIN4, LOW);
+delay(500);
+//lights for 5
+digitalWrite(LED_PIN, HIGH);
+digitalWrite(LED_PIN2, LOW);
+digitalWrite(LED_PIN3, HIGH);
+digitalWrite(LED_PIN4, LOW);
+delay(500);
+//lights for 6
+digitalWrite(LED_PIN, LOW);
+digitalWrite(LED_PIN2, HIGH);
+digitalWrite(LED_PIN3, HIGH);
+digitalWrite(LED_PIN4, LOW);
+delay(500);
+//lights for 7
+digitalWrite(LED_PIN, HIGH);
+digitalWrite(LED_PIN2, HIGH);
+digitalWrite(LED_PIN3, HIGH);
+digitalWrite(LED_PIN4, LOW);
+delay(500);
+//lights for 8
+digitalWrite(LED_PIN, LOW);
+digitalWrite(LED_PIN2, LOW);
+digitalWrite(LED_PIN3, LOW);
+digitalWrite(LED_PIN4, HIGH);
+delay(500);
+//lights for 9
+digitalWrite(LED_PIN, HIGH);
+digitalWrite(LED_PIN2, LOW);
+digitalWrite(LED_PIN3, LOW);
+digitalWrite(LED_PIN4, HIGH);
+delay(500);
+//lights for 10
+digitalWrite(LED_PIN, LOW);
+digitalWrite(LED_PIN2, HIGH);
+digitalWrite(LED_PIN3, LOW);
+digitalWrite(LED_PIN4, HIGH);
+delay(500);
+//lights for 11
+digitalWrite(LED_PIN, HIGH);
+digitalWrite(LED_PIN2, HIGH);
+digitalWrite(LED_PIN3, LOW);
+digitalWrite(LED_PIN4, HIGH);
+delay(500);
+//lights for 12
+digitalWrite(LED_PIN, LOW);
+digitalWrite(LED_PIN2, LOW);
+digitalWrite(LED_PIN3, HIGH);
+digitalWrite(LED_PIN4, HIGH);
+delay(500);
+//lights for 13
+digitalWrite(LED_PIN, HIGH);
+digitalWrite(LED_PIN2, LOW);
+digitalWrite(LED_PIN3, HIGH);
+digitalWrite(LED_PIN4, HIGH);
+delay(500);
+//lights for 14
+digitalWrite(LED_PIN, LOW);
+digitalWrite(LED_PIN2, HIGH);
+digitalWrite(LED_PIN3, HIGH);
+digitalWrite(LED_PIN4, HIGH);
+delay(500);
+//lights for 15
+digitalWrite(LED_PIN, HIGH);
+digitalWrite(LED_PIN2, HIGH);
+digitalWrite(LED_PIN3, HIGH);
+digitalWrite(LED_PIN4, HIGH);
+delay(500);
+}
+
+//PUSH BUTTONS
+/*OBJECTIVE 1 Connecting a push button through a pull-up resistor to an Arduino, 
+and reading the button's state via one of the Arduino's digital input pins through 
+the Serial Monitor.*/
+
+//EXTRENAL PULL UP RESISTOR
+int ButtonPin = 13;
+int Read;
+void setup() {
+pinMode(ButtonPin, INPUT);
+Serial.begin(9600);
+}
+
+void loop() {
+Read = digitalRead(ButtonPin);
+Serial.println(Read);
+delay(200);
+}
+
+//EMBEDDED PULL UP RESISTOR
+int buttonPin = 2; // Example using digital pin 2
+// Declare the variable to store button state
+int buttonState;
+void setup() {
+  // Initialize Serial communication
+  Serial.begin(9600);
+
+  // Set the button pin as input with internal pull-up enabled
+  pinMode(buttonPin, INPUT_PULLUP);
+}
+
+void loop() {
+  // Read the state of the button
+  buttonState = digitalRead(buttonPin);
+
+  // Print the button state to the Serial Monitor
+  Serial.println(buttonState);
+
+  // Delay for a moment to make the Serial output readable
+  delay(500); // Delay in milliseconds
+}
+
+//OBJECTIVE 2- CONTROLLING LED
+int buttonPin = 2; // Example using digital pin 2
+int LEDpin = 9;
+// Declare the variable to store button state
+int buttonState;
+
+void setup() {
+  // Initialize Serial communication
+  Serial.begin(9600);
+  // Set the button pin as input with internal pull-up enabled
+  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(LEDpin, OUTPUT);
+}
+
+void loop() {
+  // Read the state of the button
+  buttonState = digitalRead(buttonPin);
+  
+//    TURNING ON THE LED WITH THE BUTTON!!!!!!!!!!!!
+  if (buttonState == 0){
+    digitalWrite(LEDpin, HIGH);
+    delay(500);
+  }
+  else{
+    digitalWrite(LEDpin, LOW);
+  }
+
+  // Print the button state to the Serial Monitor
+  Serial.println(buttonState);
+
+  // Delay for a moment to make the Serial output readable
+  delay(500); // Delay in milliseconds
+}
+
+//OBJECTIVE 3 TOGGLING
+int buttonPin = 2; // Example using digital pin 2
+int LEDpin = 9;
+
+// Declare the variable to store button state
+int LEDstate = LOW;
+int Butlast;        //button state 
+int Butnew;
+
+void setup() {
+  // Initialize Serial communication
+  Serial.begin(9600);
+
+  // Set the button pin as input with internal pull-up enabled
+  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(LEDpin, OUTPUT);
+
+  Butnew = digitalRead(buttonPin);
+}
+
+void loop() {
+  Butlast = Butnew;                 //last "on or off" is not the new 
+  // Read the state of the button 
+  Butnew = digitalRead(buttonPin);
+
+  // TOGGLE THE STATE
+  if (Butlast == HIGH && Butnew == LOW){      // if both true then returns true 
+
+    if(LEDstate == LOW){
+      LEDstate = HIGH;         //if it was off low it is now high
+    }
+    else{
+      LEDstate = LOW;
+    }
+    digitalWrite(LEDpin, LEDstate);
+
+  }
+}
